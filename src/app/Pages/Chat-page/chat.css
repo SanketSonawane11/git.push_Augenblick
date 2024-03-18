@@ -7,14 +7,24 @@
 .chat-main {
   max-width: 100vw;
   min-height: 100vh;
-  background-color: #2a2a2a;
+  background-color: #131314;
   color: #fff;
+}
+
+.header h2 {
+  background: linear-gradient(to right, lightblue, #feb47b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.user-input button{
+  border-radius: 0.3vw 2vw 2vw 0.3vw;
 }
 
 /* .chat-window, .chat-content, .footer, .user-input button, input{
   border: 2px solid #fff;
 } */
 
-::-webkit-scrollbar{
+::-webkit-scrollbar {
   width: 0;
 }
