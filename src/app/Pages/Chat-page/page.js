@@ -11,10 +11,18 @@ import axios from "axios";
 function App() {
     const [input, setInput] = useState("");
     const [currentResponse, setcurrentResponse] = useState("");
+    const [isLoading, setisLoading] = useState(false);
 
     const fetchResponse = async (userInput) => {
         try {
-            const response = await axios.get(`https://eced-34-143-188-62.ngrok-free.app/chatbot?text=${userInput}`
+            setisLoading(true);
+            const headers = {
+                'ngrok-skip-browser-warning': '545'
+            }
+
+            const response = await axios.get(`https://d079-34-143-141-38.ngrok-free.app/chatbot?text=${userInput}`, {
+                headers
+            }
             );
 
             if (response.status === 200) {
@@ -26,16 +34,10 @@ function App() {
             console.error('Error:', error.message);
             setcurrentResponse(error.message);
         }
-    };
-
-    async function getUser() {
-        try {
-            const response = await axios.get(`https://eced-34-143-188-62.ngrok-free.app/chatbot?text="shoes under 1000"`);
-            console.log(response);
-        } catch (error) {
-            console.error(error);
+        finally {
+            setisLoading(false);
         }
-    }
+    };
 
     return (
         <div className="chat-main flex items-center overflow-hiddden gap-[2vw]">
@@ -55,8 +57,9 @@ function App() {
                     </div>
                 </div>
                 <div className="chat-content flex items-center gap-[1.5vw] justify-start flex-col w-[90vw] h-[77vh] py-[1vw]">
-                    <div className="chat-response w-[90%] rounded-xl px-[1.5vw] py-[2vw]">
-                        {currentResponse ? <>{currentResponse}</> : <EmptyChat />}
+                    <div className="chat-response w-[90%] flex items-center justify-center rounded-xl px-[1.5vw] py-[2vw]">
+                        {currentResponse ? <p className="text-[1.2vw]">{currentResponse}</p> : isLoading ?
+                            <img src="/Infinity-1s-200px.gif" width={100} />: <EmptyChat />}
                     </div>
                     <div className="footer fixed bottom-[3.5vw] w-full h-[8vh] flex flex-col items-center justify-center">
                         <div className="user-input rounded-full text-white font-medium bg-[#3a3a3ad4] flex items-center justify-center text-[1.1vw] w-[70%] h-[100%] p-[0.5vw] border-blue-600">
@@ -70,9 +73,9 @@ function App() {
                             <button
                                 className="w-[10%] h-[100%] hover:bg-[#ffffff2d] active:scale-70 active:text-[#2a2a2a] active:bg-white transition-all duration-500 ease-in-out"
                                 onClick={() => {
-                                    // fetchResponse(input);
-                                    getUser();
+                                    fetchResponse(input);
                                     setInput("");
+                                    setcurrentResponse("");
                                 }}
                             >
                                 Send
