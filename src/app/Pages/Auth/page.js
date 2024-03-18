@@ -13,7 +13,7 @@ function page() {
         <div className='main'>
             <div className="avatarDiv">
                 <div className="avatar">
-                    <h2 className='logo text-[50px font-semibold'>Logo </h2>
+                    <h2 className='logo text-[50px font-semibold'> Ask Up! </h2>
                 </div>
             </div>
 

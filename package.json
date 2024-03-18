@@ -2,7 +2,7 @@
   "name": "customer-assistant",
   "version": "0.1.0",
   "private": true,
-  "proxy":"https://d079-34-143-141-38.ngrok-free.app/",
+  "proxy":"https://b58b-34-143-141-38.ngrok-free.app",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

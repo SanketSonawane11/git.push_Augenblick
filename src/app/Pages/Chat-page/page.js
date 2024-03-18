@@ -11,16 +11,17 @@ import axios from "axios";
 function App() {
     const [input, setInput] = useState("");
     const [currentResponse, setcurrentResponse] = useState("");
-    const [isLoading, setisLoading] = useState(false);
+    // const [isLoading, setisLoading] = useState(false);
+    const [question, setquestion] = useState("");
 
     const fetchResponse = async (userInput) => {
         try {
-            setisLoading(true);
+            // setisLoading(true);
             const headers = {
-                'ngrok-skip-browser-warning': '545'
+                'ngrok-skip-browser-warning': '5455'
             }
 
-            const response = await axios.get(`https://d079-34-143-141-38.ngrok-free.app/chatbot?text=${userInput}`, {
+            const response = await axios.get(`https://1db5-34-32-167-71.ngrok-free.app/chatbot?text=%22shirts%20under%2010000%22`, {
                 headers
             }
             );
@@ -34,9 +35,9 @@ function App() {
             console.error('Error:', error.message);
             setcurrentResponse(error.message);
         }
-        finally {
-            setisLoading(false);
-        }
+        // finally {
+        //     setisLoading(false);
+        // }
     };
 
     return (
@@ -58,10 +59,15 @@ function App() {
                 </div>
                 <div className="chat-content flex items-center gap-[1.5vw] justify-start flex-col w-[90vw] h-[77vh] py-[1vw]">
                     <div className="chat-response w-[90%] flex items-center justify-center rounded-xl px-[1.5vw] py-[2vw]">
-                        {currentResponse ? <p className="text-[1.2vw]">{currentResponse}</p> : isLoading ?
-                            <img src="/Infinity-1s-200px.gif" width={100} />: <EmptyChat />}
+                        {currentResponse ? <div className="flex flex-col">
+                        <h2 className="text-[2vw] font-semibold">Q: {question}</h2>
+
+                            <p className="text-[1.2vw]">{currentResponse}</p>  </div>
+                            // : isLoading ?
+                            //     <img src="/Infinity-1s-200px.gif" width={100} /> 
+                            : <EmptyChat />}
                     </div>
-                    <div className="footer fixed bottom-[3.5vw] w-full h-[8vh] flex flex-col items-center justify-center">
+                    <div className="footer fixed bottom-[3.5vw] w-[90vw] h-[8vh] flex flex-col items-center justify-center">
                         <div className="user-input rounded-full text-white font-medium bg-[#3a3a3ad4] flex items-center justify-center text-[1.1vw] w-[70%] h-[100%] p-[0.5vw] border-blue-600">
                             <input
                                 className="w-[90%] ml-[1vw] text-white h-[100%] bg-transparent focus:border-4"
@@ -74,6 +80,7 @@ function App() {
                                 className="w-[10%] h-[100%] hover:bg-[#ffffff2d] active:scale-70 active:text-[#2a2a2a] active:bg-white transition-all duration-500 ease-in-out"
                                 onClick={() => {
                                     fetchResponse(input);
+                                    setquestion(input);
                                     setInput("");
                                     setcurrentResponse("");
                                 }}
